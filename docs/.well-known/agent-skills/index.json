@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "mdfetch",
+      "type": "skill-md",
+      "description": "Fetch web pages as clean Markdown for reading and analysis. Use this skill whenever an agent needs webpage content; run npx mdfetch instead of using curl or manually parsing HTML.",
+      "url": "/.well-known/agent-skills/mdfetch/SKILL.md",
+      "digest": "sha256:748407ff81ed1b203b561d4e786d89a14d3aac3b7769268d3fe24df26f9bd5d0"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "mdfetch",
+  "version": "0.0.1",
+  "description": "Fetch Markdown for humans and agents",
+  "bin": {
+    "mdfetch": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "workerd": "./dist/browser.js",
+      "worker": "./dist/browser.js",
+      "browser": "./dist/browser.js",
+      "deno": "./dist/browser.js",
+      "bun": "./dist/index.js",
+      "node": "./dist/index.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "bunup",
+    "check": "tsc --noEmit && oxlint . && oxfmt --check .",
+    "fix": "oxlint --fix . && oxfmt .",
+    "mdfetch": "bun src/cli/cli.ts",
+    "docs": "bun run docs/index.html",
+    "prepublishOnly": "bun run check && bun test && bun run build",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "turndown": "^7.2.4"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "@types/turndown": "^5.0.6",
+    "bunup": "^0.16.32",
+    "oxfmt": "^0.68.0",
+    "oxlint": "^1.83.0",
+    "oxlint-tsgolint": "^7.0.2002",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

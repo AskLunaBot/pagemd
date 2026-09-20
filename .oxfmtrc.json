@@ -1,0 +1,55 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "endOfLine": "lf",
+  "insertFinalNewline": true,
+  "singleAttributePerLine": true,
+  "quoteProps": "as-needed",
+  "objectWrap": "collapse",
+  "experimentalOperatorPosition": "end",
+  "proseWrap": "always",
+  "embeddedLanguageFormatting": "auto",
+  "jsdoc": {
+    "capitalizeDescriptions": true,
+    "commentLineStrategy": "multiline",
+    "descriptionWithDot": true,
+    "lineWrappingStyle": "greedy",
+    "preferCodeFences": true,
+    "separateReturnsFromParam": true,
+    "separateTagGroups": true
+  },
+  "sortImports": {
+    "ignoreCase": true,
+    "newlinesBetween": true,
+    "order": "asc",
+    "partitionByComment": true,
+    "partitionByNewline": false,
+    "sortSideEffects": false,
+    "groups": [
+      "builtin",
+      "external",
+      ["internal", "subpath"],
+      ["parent", "sibling", "index"],
+      "type",
+      "unknown"
+    ]
+  },
+  "sortPackageJson": { "sortScripts": true },
+  "ignorePatterns": [
+    "node_modules/**",
+    "dist/**",
+    "out/**",
+    ".tmp/**",
+    "coverage/**",
+    "bun.lock"
+  ]
+}
