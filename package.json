@@ -38,10 +38,10 @@
     "check": "tsc --noEmit && oxlint . && oxfmt --check .",
     "docs": "bun run docs/index.html",
     "fix": "oxlint --fix . && oxfmt .",
-    "major": "npm version major --no-git-tag-version",
-    "minor": "npm version minor --no-git-tag-version",
+    "major": "npm version major",
+    "minor": "npm version minor",
     "pagemd": "bun src/cli/cli.ts",
-    "patch": "npm version patch --no-git-tag-version",
+    "patch": "npm version patch",
     "prepublishOnly": "bun run check && bun test && bun run build",
     "test": "bun test"
   },
