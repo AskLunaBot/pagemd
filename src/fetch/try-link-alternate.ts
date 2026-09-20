@@ -6,10 +6,10 @@ import { fetchResult } from "./result.ts";
 import { contentTypeFields } from "./with-content-type.ts";
 
 import type { FetchMarkdownResult } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export async function tryLinkAlternate(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   url: string,
 ): Promise<FetchMarkdownResult | undefined> {
   const page = await requestPage(runtime, url);
@@ -22,7 +22,7 @@ export async function tryLinkAlternate(
 }
 
 type LinkWalk = {
-  readonly runtime: MdFetchRuntime;
+  readonly runtime: PagemdRuntime;
   readonly url: string;
   readonly links: string[];
   readonly index: number;

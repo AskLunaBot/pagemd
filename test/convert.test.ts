@@ -1,9 +1,9 @@
 import { expect, test } from "bun:test";
 
-import { createMdFetch, isHtml } from "@/index.ts";
+import { createPagemd, isHtml } from "@/index.ts";
 
 test("converts headings and strips scripts", async () => {
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: { get: async () => undefined, set: async () => undefined },
   });
   const result = await client.convert(
@@ -16,7 +16,7 @@ test("converts headings and strips scripts", async () => {
 });
 
 test("rewrites relative links against baseUrl", async () => {
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: { get: async () => undefined, set: async () => undefined },
   });
   const result = await client.convert(

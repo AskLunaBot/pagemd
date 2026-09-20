@@ -1,7 +1,7 @@
-import type { MdFetchError } from "@/types/errors.ts";
+import type { PagemdError } from "@/types/errors.ts";
 
-export function formatErrorText(error: MdFetchError): string {
-  const lines = [`mdfetch: ${error.message}`, error.hint];
+export function formatErrorText(error: PagemdError): string {
+  const lines = [`pagemd: ${error.message}`, error.hint];
   if (error.details?.didYouMean !== undefined) {
     lines.splice(1, 0, `Did you mean "${error.details.didYouMean}"?`);
   }

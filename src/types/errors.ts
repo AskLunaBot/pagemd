@@ -1,23 +1,23 @@
-import type { MdFetchErrorCode } from "./error-codes.ts";
-import type { MdFetchErrorDetails } from "./error-details.ts";
+import type { PagemdErrorCode } from "./error-codes.ts";
+import type { PagemdErrorDetails } from "./error-details.ts";
 
-export class MdFetchError extends Error {
-  readonly code: MdFetchErrorCode;
+export class PagemdError extends Error {
+  readonly code: PagemdErrorCode;
   readonly hint: string;
   readonly url?: string;
   readonly status?: number;
-  readonly details?: MdFetchErrorDetails;
+  readonly details?: PagemdErrorDetails;
 
   constructor(options: {
-    code: MdFetchErrorCode;
+    code: PagemdErrorCode;
     message: string;
     hint: string;
     url?: string;
     status?: number;
-    details?: MdFetchErrorDetails;
+    details?: PagemdErrorDetails;
   }) {
     super(options.message);
-    this.name = "MdFetchError";
+    this.name = "PagemdError";
     this.code = options.code;
     this.hint = options.hint;
     if (options.url !== undefined) {

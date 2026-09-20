@@ -8,10 +8,10 @@ import { selectProbes } from "./select-probes.ts";
 import type { ProbeContext } from "./types.ts";
 import type { DiscoverOptions } from "@/types/options.ts";
 import type { DiscoverResult, ProtocolHit } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export async function runDiscover(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   input: string,
   options: DiscoverOptions = {},
 ): Promise<DiscoverResult> {

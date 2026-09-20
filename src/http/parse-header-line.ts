@@ -1,4 +1,4 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 import { helpHint } from "@/utils/help-hint.ts";
 
 export function parseHeaderLine(line: string): {
@@ -16,8 +16,8 @@ export function parseHeaderLine(line: string): {
   return { name, value: line.slice(separator + 1).trim() };
 }
 
-function invalidHeader(value: string): MdFetchError {
-  return new MdFetchError({
+function invalidHeader(value: string): PagemdError {
+  return new PagemdError({
     code: "invalid_flag_value",
     message: `Invalid header "${value}".`,
     hint: `${helpHint()} Use --header "Name: value".`,

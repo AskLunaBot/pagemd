@@ -1,5 +1,5 @@
 import type { ProtocolHit } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export type HomepageSnapshot = {
   readonly origin: string;
@@ -10,7 +10,7 @@ export type HomepageSnapshot = {
 };
 
 export type ProbeContext = {
-  readonly runtime: MdFetchRuntime;
+  readonly runtime: PagemdRuntime;
   readonly origin: string;
   readonly inputPath: string;
   readonly homepage: HomepageSnapshot;

@@ -1,5 +1,5 @@
 export function fetchHelpText(): string {
-  return `mdfetch fetch <url> [url...]
+  return `pagemd fetch <url> [url...]
 
 Fetch a page as Markdown. This is the default verb when the first
 argument looks like a URL.

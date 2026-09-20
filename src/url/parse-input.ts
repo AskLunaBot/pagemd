@@ -1,4 +1,4 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 import { helpHint } from "@/utils/help-hint.ts";
 
 import { collapsePathSlashes } from "./collapse-slashes.ts";
@@ -15,10 +15,10 @@ export type NormalizedUrl = {
 };
 
 function invalidUrl(raw: string): never {
-  throw new MdFetchError({
+  throw new PagemdError({
     code: "invalid_url",
     message: `Invalid URL: ${raw}`,
-    hint: `${helpHint()} Example: mdfetch --json https://better-auth.com/docs/installation`,
+    hint: `${helpHint()} Example: pagemd --json https://better-auth.com/docs/installation`,
   });
 }
 

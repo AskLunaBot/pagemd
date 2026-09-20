@@ -16,7 +16,7 @@ import { defaultUserAgent } from "@/utils/package-version.ts";
 import type {
   CacheStore,
   ConvertOptions,
-  CreateMdFetchOptions,
+  CreatePagemdOptions,
   DiscoverOptions,
   FetchMarkdownOptions,
 } from "@/types/options.ts";
@@ -25,9 +25,9 @@ import type {
   DiscoverResult,
   FetchMarkdownResult,
 } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
-export type MdFetchClient = {
+export type PagemdClient = {
   readonly fetch: (
     input: string | URL,
     options?: FetchMarkdownOptions,
@@ -42,22 +42,20 @@ export type MdFetchClient = {
   ) => Promise<ConvertResult>;
 };
 
-export function createMdFetch(
-  options: CreateMdFetchOptions = {},
-): MdFetchClient {
+export function createPagemd(options: CreatePagemdOptions = {}): PagemdClient {
   return bindClient(runtimeFrom(options));
 }
 
-export const mdfetch: MdFetchClient = createMdFetch();
+export const pagemd: PagemdClient = createPagemd();
 
-function runtimeFrom(options: CreateMdFetchOptions): MdFetchRuntime {
+function runtimeFrom(options: CreatePagemdOptions): PagemdRuntime {
   const cache = resolveCache(options.cache);
   return { ...runtimeCore(options), ...withOptional("cache", cache) };
 }
 
 function runtimeCore(
-  options: CreateMdFetchOptions,
-): Omit<MdFetchRuntime, "cache"> {
+  options: CreatePagemdOptions,
+): Omit<PagemdRuntime, "cache"> {
   return {
     fetch: pick(options.fetch, globalThis.fetch),
     htmlToMarkdown: pick(options.htmlToMarkdown, htmlToMarkdownDefault),
@@ -80,7 +78,7 @@ function pick<Value>(value: Value | undefined, fallback: Value): Value {
 }
 
 function resolveCache(
-  cache: CreateMdFetchOptions["cache"],
+  cache: CreatePagemdOptions["cache"],
 ): CacheStore | undefined {
   if (cache === "false") {
     return undefined;
@@ -91,7 +89,7 @@ function resolveCache(
   return cache;
 }
 
-function bindClient(runtime: MdFetchRuntime): MdFetchClient {
+function bindClient(runtime: PagemdRuntime): PagemdClient {
   return {
     fetch: async (input, fetchOptions) =>
       await runFetch(runtime, String(input), fetchOptions),

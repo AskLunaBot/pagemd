@@ -1,17 +1,17 @@
 import { expect, test } from "bun:test";
 
-import { createMdFetchCommand } from "@/index.ts";
+import { createPagemdCommand } from "@/index.ts";
 
 test("virtual help is stdout and exit 0", async () => {
-  const command = createMdFetchCommand();
+  const command = createPagemdCommand();
   const result = await command.execute(["--help"]);
   expect(result.exitCode).toBe(0);
   expect(result.stderr).toBe("");
-  expect(result.stdout).toContain("mdfetch fetch <url> [url...]");
+  expect(result.stdout).toContain("pagemd fetch <url> [url...]");
 });
 
 test("virtual json help is an envelope", async () => {
-  const command = createMdFetchCommand();
+  const command = createPagemdCommand();
   const result = await command.execute(["--json", "--help"]);
   expect(result.exitCode).toBe(0);
   expect(result.stdout).toContain('"ok": true');
@@ -19,7 +19,7 @@ test("virtual json help is an envelope", async () => {
 });
 
 test("virtual usage error is stderr unless --json", async () => {
-  const command = createMdFetchCommand();
+  const command = createPagemdCommand();
   const text = await command.execute(["discver"]);
   expect(text.exitCode).toBe(2);
   expect(text.stdout).toBe("");
@@ -31,14 +31,14 @@ test("virtual usage error is stderr unless --json", async () => {
 });
 
 test("convert without stdin is help", async () => {
-  const command = createMdFetchCommand();
+  const command = createPagemdCommand();
   const result = await command.execute(["convert"]);
   expect(result.exitCode).toBe(0);
-  expect(result.stdout).toContain("mdfetch convert");
+  expect(result.stdout).toContain("pagemd convert");
 });
 
 test("virtual convert reads piped stdin", async () => {
-  const command = createMdFetchCommand({ stdin: "<h1>Hello</h1>" });
+  const command = createPagemdCommand({ stdin: "<h1>Hello</h1>" });
   const result = await command.execute([
     "convert",
     "--base-url",
@@ -46,14 +46,14 @@ test("virtual convert reads piped stdin", async () => {
   ]);
   expect(result.exitCode).toBe(0);
   expect(result.stdout).toContain("# Hello");
-  expect(result.stdout).toContain("mdfetch convert");
+  expect(result.stdout).toContain("pagemd convert");
 });
 
 test("virtual convert reads host files", async () => {
   const files: Readonly<Record<string, string>> = {
     "/work/page.html": "<h1>From file</h1>",
   };
-  const command = createMdFetchCommand({
+  const command = createPagemdCommand({
     cwd: "/work",
     readFile: async (path) => {
       const html = files[path];
@@ -69,8 +69,8 @@ test("virtual convert reads host files", async () => {
   expect(result.stdout).toContain("base-url: file:///work/page.html");
 });
 
-test("factory fetch is used for virtual mdfetch fetch", async () => {
-  const command = createMdFetchCommand({
+test("factory fetch is used for virtual pagemd fetch", async () => {
+  const command = createPagemdCommand({
     cache: "false",
     fetch: async () =>
       new Response("# Title\n", {

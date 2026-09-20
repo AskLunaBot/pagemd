@@ -1,8 +1,8 @@
 import type { RequestOptions } from "./request-options.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export function requestHeaders(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   options: RequestOptions,
 ): Headers {
   const headers = new Headers(runtime.extraHeaders);

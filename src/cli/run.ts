@@ -1,4 +1,4 @@
-import { createMdFetch } from "@/client/create.ts";
+import { createPagemd } from "@/client/create.ts";
 
 import { discoverOptions, fetchOptions } from "./action-options.ts";
 import { clientOptions } from "./client-options.ts";
@@ -10,20 +10,20 @@ import { readConvertInput } from "./read-input.ts";
 import type { ActionResult, SingleResult } from "./action-result.ts";
 import type { CliHost } from "./host.ts";
 import type { ParsedCli } from "./parsed.ts";
-import type { MdFetchClient } from "@/client/create.ts";
-import type { CreateMdFetchOptions } from "@/types/options.ts";
+import type { PagemdClient } from "@/client/create.ts";
+import type { CreatePagemdOptions } from "@/types/options.ts";
 
 export async function runAction(
   parsed: ParsedCli,
   host: CliHost,
-  defaults: CreateMdFetchOptions = {},
+  defaults: CreatePagemdOptions = {},
 ): Promise<ActionResult> {
-  const client = createMdFetch(clientOptions(parsed, defaults));
+  const client = createPagemd(clientOptions(parsed, defaults));
   return await dispatch(client, parsed, host);
 }
 
 async function dispatch(
-  client: MdFetchClient,
+  client: PagemdClient,
   parsed: ParsedCli,
   host: CliHost,
 ): Promise<ActionResult> {
@@ -41,14 +41,14 @@ async function dispatch(
 }
 
 type ConvertJob = {
-  readonly client: MdFetchClient;
+  readonly client: PagemdClient;
   readonly parsed: ParsedCli;
   readonly host: CliHost;
   readonly filePath?: string;
 };
 
 async function runConvert(
-  client: MdFetchClient,
+  client: PagemdClient,
   parsed: ParsedCli,
   host: CliHost,
 ): Promise<ActionResult> {

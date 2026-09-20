@@ -2,17 +2,17 @@ import { expect, test } from "bun:test";
 
 import { parseArgv } from "@/cli/parse.ts";
 import { renderFailure, renderHelp, renderSuccess } from "@/cli/render.ts";
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 
 test("unknown action suggests discover", () => {
   expect(() => parseArgv(["discver", "https://example.com"])).toThrow(
-    MdFetchError,
+    PagemdError,
   );
   try {
     parseArgv(["discver", "https://example.com"]);
   } catch (error) {
-    expect(error).toBeInstanceOf(MdFetchError);
-    if (error instanceof MdFetchError) {
+    expect(error).toBeInstanceOf(PagemdError);
+    if (error instanceof PagemdError) {
       expect(error.code).toBe("unknown_action");
       expect(error.details?.didYouMean).toBe("discover");
       expect(error.hint).toContain("--help");
@@ -46,9 +46,9 @@ test("help is json when --json is set", () => {
 test("root --help lists every verb and flag", () => {
   const parsed = parseArgv(["--help"]);
   const output = renderHelp(parsed);
-  expect(output).toContain("mdfetch fetch <url> [url...]");
-  expect(output).toContain("mdfetch discover <url> [url...]");
-  expect(output).toContain("mdfetch convert [file...]");
+  expect(output).toContain("pagemd fetch <url> [url...]");
+  expect(output).toContain("pagemd discover <url> [url...]");
+  expect(output).toContain("pagemd convert [file...]");
   expect(output).not.toContain("There are no short aliases");
   expect(output).toContain("--accept-markdown");
   expect(output).toContain("--protocol");
@@ -89,7 +89,7 @@ test("parses --cache false", () => {
 
 test("rejects --cache off", () => {
   expect(() => parseArgv(["--cache", "off", "https://example.com"])).toThrow(
-    MdFetchError,
+    PagemdError,
   );
 });
 
@@ -146,7 +146,7 @@ test("without --json discover is a markdown catalog", () => {
   );
   expect(output).toContain("# https://example.com");
   expect(output).toContain("## llms-txt");
-  expect(output).toContain("mdfetch discover:");
+  expect(output).toContain("pagemd discover:");
   expect(output).not.toContain('"ok":');
 });
 
@@ -170,7 +170,7 @@ test("without --json success is markdown, not envelope", () => {
     },
   );
   expect(output).toContain("# Hello");
-  expect(output).toContain("mdfetch: https://example.com");
+  expect(output).toContain("pagemd: https://example.com");
   expect(output).toContain("source: html-convert");
   expect(output).not.toContain('"ok":');
 });

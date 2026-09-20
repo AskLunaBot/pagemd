@@ -4,10 +4,10 @@ import { htmlToMarkdownDefault } from "./turndown.ts";
 
 import type { ConvertOptions } from "@/types/options.ts";
 import type { ConvertResult } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export async function runConvert(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   html: string,
   options: ConvertOptions = {},
 ): Promise<ConvertResult> {

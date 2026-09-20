@@ -1,4 +1,4 @@
-export type MdFetchErrorDetails = {
+export type PagemdErrorDetails = {
   readonly retryAfterSeconds?: number;
   readonly contentType?: string;
   readonly flag?: string;

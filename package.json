@@ -1,9 +1,17 @@
 {
-  "name": "mdfetch",
-  "version": "0.0.1",
+  "name": "pagemd",
+  "version": "0.0.0",
   "description": "Fetch Markdown for humans and agents",
+  "homepage": "https://github.com/AskLunaBot/pagemd",
+  "bugs": {
+    "url": "https://github.com/AskLunaBot/pagemd/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AskLunaBot/pagemd.git"
+  },
   "bin": {
-    "mdfetch": "./dist/cli.js"
+    "pagemd": "./dist/cli.js"
   },
   "files": [
     "dist"
@@ -28,9 +36,12 @@
   "scripts": {
     "build": "bunup",
     "check": "tsc --noEmit && oxlint . && oxfmt --check .",
-    "fix": "oxlint --fix . && oxfmt .",
-    "mdfetch": "bun src/cli/cli.ts",
     "docs": "bun run docs/index.html",
+    "fix": "oxlint --fix . && oxfmt .",
+    "major": "npm version major --no-git-tag-version",
+    "minor": "npm version minor --no-git-tag-version",
+    "pagemd": "bun src/cli/cli.ts",
+    "patch": "npm version patch --no-git-tag-version",
     "prepublishOnly": "bun run check && bun test && bun run build",
     "test": "bun test"
   },

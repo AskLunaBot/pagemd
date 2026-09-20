@@ -1,6 +1,6 @@
 export function helpHint(action?: string): string {
   if (action === undefined) {
-    return "Run `mdfetch --help` to see usage.";
+    return "Run `pagemd --help` to see usage.";
   }
-  return `Run \`mdfetch ${action} --help\` to see ${action} flags.`;
+  return `Run \`pagemd ${action} --help\` to see ${action} flags.`;
 }

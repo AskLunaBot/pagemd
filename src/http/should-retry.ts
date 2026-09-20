@@ -1,7 +1,7 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 
 export function shouldRetry(error: Error): boolean {
-  if (!(error instanceof MdFetchError)) {
+  if (!(error instanceof PagemdError)) {
     return false;
   }
   if (error.code === "timeout" || error.code === "unreachable") {

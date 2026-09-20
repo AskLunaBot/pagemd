@@ -1,4 +1,4 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 import { helpHint } from "@/utils/help-hint.ts";
 
 import { protocolIds } from "./protocol-ids.ts";
@@ -16,7 +16,7 @@ export function selectProbes(ids: string[] | undefined): ProtocolProbe[] {
 function requireProbe(id: string): ProtocolProbe {
   const probe = probeById(id);
   if (probe === undefined) {
-    throw new MdFetchError({
+    throw new PagemdError({
       code: "invalid_flag_value",
       message: `Unknown protocol "${id}".`,
       hint: helpHint("discover"),

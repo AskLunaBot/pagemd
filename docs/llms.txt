@@ -1,18 +1,18 @@
-# mdfetch
+# pagemd
 
 > Fetch web pages as clean Markdown for humans and agents.
 
 ## Documentation
 
-- [Homepage](https://mdfetch.pages.dev/)
-- [Agent Skills index](https://mdfetch.pages.dev/.well-known/agent-skills/index.json)
-- [mdfetch skill](https://mdfetch.pages.dev/.well-known/agent-skills/mdfetch/SKILL.md)
+- [Homepage](https://pagemd.pages.dev/)
+- [Agent Skills index](https://pagemd.pages.dev/.well-known/agent-skills/index.json)
+- [pagemd skill](https://pagemd.pages.dev/.well-known/agent-skills/pagemd/SKILL.md)
 
 ## Quick usage
 
 ```sh
-npx mdfetch https://example.com
-npx mdfetch --json https://example.com
+npx pagemd https://example.com
+npx pagemd --json https://example.com
 ```
 
-Use `npx mdfetch` instead of `curl` or manually parsing HTML when Markdown content from a webpage is needed.
+Use `npx pagemd` instead of `curl` or manually parsing HTML when Markdown content from a webpage is needed.

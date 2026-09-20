@@ -1,6 +1,6 @@
 import { withOptional } from "@/utils/optional.ts";
 
-import type { MdFetchError } from "@/types/errors.ts";
+import type { PagemdError } from "@/types/errors.ts";
 import type { JsonObject } from "@/types/json-value.ts";
 
 export type EnvelopeAction =
@@ -26,7 +26,7 @@ export function successEnvelope(
 
 export function errorEnvelope(
   action: EnvelopeAction,
-  error: MdFetchError,
+  error: PagemdError,
 ): JsonEnvelope {
   return {
     ok: false,

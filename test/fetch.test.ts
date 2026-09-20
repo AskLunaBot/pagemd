@@ -1,9 +1,9 @@
 import { expect, test } from "bun:test";
 
-import { createMdFetch, mdfetch, MdFetchError } from "@/index.ts";
+import { createPagemd, pagemd, PagemdError } from "@/index.ts";
 
 test("uses injected fetch for accept-markdown", async () => {
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: { get: async () => undefined, set: async () => undefined },
     fetch: async (input) =>
       new Response("# Title\n\nHello\n", {
@@ -21,7 +21,7 @@ test("uses injected fetch for accept-markdown", async () => {
 });
 
 test("falls back to html convert", async () => {
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: { get: async () => undefined, set: async () => undefined },
     fetch: async () =>
       new Response(
@@ -38,11 +38,11 @@ test("falls back to html convert", async () => {
   expect(result.markdown).toContain("Example Domain");
 });
 
-test("exports a default mdfetch client", async () => {
-  expect(typeof mdfetch.fetch).toBe("function");
-  expect(typeof mdfetch.discover).toBe("function");
-  expect(typeof mdfetch.convert).toBe("function");
-  const local = await mdfetch.convert("<h1>Hi</h1>", {
+test("exports a default pagemd client", async () => {
+  expect(typeof pagemd.fetch).toBe("function");
+  expect(typeof pagemd.discover).toBe("function");
+  expect(typeof pagemd.convert).toBe("function");
+  const local = await pagemd.convert("<h1>Hi</h1>", {
     baseUrl: "https://example.com/",
   });
   expect(local.markdown).toContain("# Hi");
@@ -50,9 +50,9 @@ test("exports a default mdfetch client", async () => {
 
 test("sends extra headers and keeps pipeline Accept", async () => {
   let seen: Headers | undefined;
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: "false",
-    userAgent: "mdfetch-test",
+    userAgent: "pagemd-test",
     headers: { Cookie: "a=1", "User-Agent": "browser-ua" },
     fetch: async (_input, init) => {
       seen = new Headers(init?.headers);
@@ -70,7 +70,7 @@ test("sends extra headers and keeps pipeline Accept", async () => {
 
 test("retries 503 then succeeds", async () => {
   let hits = 0;
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: "false",
     retry: 1,
     retryDelayMs: 0,
@@ -92,7 +92,7 @@ test("retries 503 then succeeds", async () => {
 
 test("does not retry 404", async () => {
   let hits = 0;
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: "false",
     retry: 3,
     fetch: async () => {
@@ -104,8 +104,8 @@ test("does not retry 404", async () => {
     await client.fetch("https://example.com/missing");
     expect(false).toBe(true);
   } catch (error) {
-    expect(error).toBeInstanceOf(MdFetchError);
-    if (error instanceof MdFetchError) {
+    expect(error).toBeInstanceOf(PagemdError);
+    if (error instanceof PagemdError) {
       expect(error.code).toBe("not_found");
     }
   }
@@ -114,7 +114,7 @@ test("does not retry 404", async () => {
 
 test("skips 404 text/plain twins and converts HTML last", async () => {
   const requested: string[] = [];
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: "false",
     fetch: async (input) => {
       requested.push(input);
@@ -142,7 +142,7 @@ test("skips 404 text/plain twins and converts HTML last", async () => {
 
 test("root URL does not request /.md", async () => {
   const requested: string[] = [];
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: "false",
     fetch: async (input) => {
       requested.push(input);
@@ -167,7 +167,7 @@ test("root URL does not request /.md", async () => {
 
 test("cache false skips the store", async () => {
   const hits: string[] = [];
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: "false",
     fetch: async () => {
       hits.push("fetch");

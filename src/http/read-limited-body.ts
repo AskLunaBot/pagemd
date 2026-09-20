@@ -1,4 +1,4 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 
 import { readHeader } from "./read-header.ts";
 
@@ -26,8 +26,8 @@ function rejectIfDeclaredTooLarge(
   }
 }
 
-function tooLarge(maxBytes: number, url: string): MdFetchError {
-  return new MdFetchError({
+function tooLarge(maxBytes: number, url: string): PagemdError {
+  return new PagemdError({
     code: "too_large",
     message: `Response exceeded ${maxBytes} bytes`,
     hint: "Raise --max-bytes or fetch a smaller page.",

@@ -4,7 +4,7 @@ import { mapNetworkError } from "./map-network-error.ts";
 import { requestHeaders } from "./request-headers.ts";
 
 import type { RequestOptions } from "./request-options.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 function requestMethod(method: RequestOptions["method"]): "GET" | "HEAD" {
   if (method === undefined) {
@@ -21,7 +21,7 @@ function redirectMode(follow: boolean): RequestRedirect {
 }
 
 export async function performFetch(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   url: string,
   options: RequestOptions,
 ): Promise<Response> {

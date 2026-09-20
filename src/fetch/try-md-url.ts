@@ -6,10 +6,10 @@ import { fetchResult } from "./result.ts";
 import { contentTypeFields } from "./with-content-type.ts";
 
 import type { FetchMarkdownResult } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export async function tryMarkdownUrl(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   url: string,
 ): Promise<FetchMarkdownResult | undefined> {
   return await tryVariants({
@@ -21,7 +21,7 @@ export async function tryMarkdownUrl(
 }
 
 type VariantWalk = {
-  readonly runtime: MdFetchRuntime;
+  readonly runtime: PagemdRuntime;
   readonly url: string;
   readonly variants: string[];
   readonly index: number;

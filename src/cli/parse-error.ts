@@ -1,12 +1,12 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 import { didYouMean } from "@/utils/did-you-mean.ts";
 import { helpHint } from "@/utils/help-hint.ts";
 
 export function unknownActionError(
   value: string,
   allowed: string[],
-): MdFetchError {
-  return new MdFetchError({
+): PagemdError {
+  return new PagemdError({
     code: "unknown_action",
     message: `Unknown action "${value}".`,
     hint: helpHint(),
@@ -18,8 +18,8 @@ export function unknownFlagError(
   flag: string,
   allowed: string[],
   action?: string,
-): MdFetchError {
-  return new MdFetchError({
+): PagemdError {
+  return new PagemdError({
     code: "unknown_flag",
     message: `Unknown flag "${flag}".`,
     hint: `${helpHint(action)} Flags do not have short aliases.`,
@@ -31,8 +31,8 @@ export function invalidFlagValueError(
   flag: string,
   value: string,
   allowed: string[],
-): MdFetchError {
-  return new MdFetchError({
+): PagemdError {
+  return new PagemdError({
     code: "invalid_flag_value",
     message: `Invalid value for ${flag}: "${value}".`,
     hint: helpHint(),
@@ -43,8 +43,8 @@ export function invalidFlagValueError(
 export function missingArgumentError(
   what: string,
   action?: string,
-): MdFetchError {
-  return new MdFetchError({
+): PagemdError {
+  return new PagemdError({
     code: "missing_argument",
     message: `Missing ${what}.`,
     hint: helpHint(action),

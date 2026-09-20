@@ -9,19 +9,19 @@ import { sleep } from "./sleep.ts";
 
 import type { FetchedPage } from "./fetched-page.ts";
 import type { RequestOptions } from "./request-options.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export type { RequestOptions } from "./request-options.ts";
 
 type RetryWalk = {
-  readonly runtime: MdFetchRuntime;
+  readonly runtime: PagemdRuntime;
   readonly url: string;
   readonly options: RequestOptions;
   readonly remaining: number;
 };
 
 export async function requestPage(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   url: string,
   options: RequestOptions = {},
 ): Promise<FetchedPage> {

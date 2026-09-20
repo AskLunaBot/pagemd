@@ -3,10 +3,10 @@ import { requestPage } from "@/http/request.ts";
 import { isUsableDocument } from "./is-usable-page.ts";
 
 import type { ProtocolDocument } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export async function expandSkillMarkdown(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   urls: string[],
 ): Promise<ProtocolDocument[]> {
   const pages = await Promise.all(
@@ -22,7 +22,7 @@ export async function expandSkillMarkdown(
 }
 
 async function loadSkillPage(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   url: string,
 ): Promise<ProtocolDocument | undefined> {
   const page = await requestPage(runtime, url, { allowErrorStatus: true });

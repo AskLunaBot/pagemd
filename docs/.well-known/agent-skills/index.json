@@ -2,11 +2,11 @@
   "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "skills": [
     {
-      "name": "mdfetch",
+      "name": "pagemd",
       "type": "skill-md",
-      "description": "Fetch web pages as clean Markdown for reading and analysis. Use this skill whenever an agent needs webpage content; run npx mdfetch instead of using curl or manually parsing HTML.",
-      "url": "/.well-known/agent-skills/mdfetch/SKILL.md",
-      "digest": "sha256:748407ff81ed1b203b561d4e786d89a14d3aac3b7769268d3fe24df26f9bd5d0"
+      "description": "Fetch web pages as clean Markdown for reading and analysis. Use this skill whenever an agent needs webpage content; run npx pagemd instead of using curl or manually parsing HTML.",
+      "url": "/.well-known/agent-skills/pagemd/SKILL.md",
+      "digest": "sha256:ff3719321441526b2e3d6744b824ad4bfae2d2e38196dd821bffe0a53b4ab96e"
     }
   ]
 }

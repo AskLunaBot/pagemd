@@ -1,3 +1,5 @@
-export const packageVersion = "0.0.1";
+import pkg from "../../package.json" with { type: "json" };
 
-export const defaultUserAgent = `mdfetch/${packageVersion}`;
+export const packageVersion = pkg.version;
+
+export const defaultUserAgent = `pagemd/${packageVersion}`;

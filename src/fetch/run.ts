@@ -1,4 +1,4 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 import { parseInput } from "@/url/parse-input.ts";
 import { defaultMaxCharacters } from "@/utils/defaults.ts";
 import { isSwitchOn } from "@/utils/is-switch-on.ts";
@@ -11,10 +11,10 @@ import { tryMarkdownUrl } from "./try-md-url.ts";
 
 import type { FetchMarkdownOptions } from "@/types/options.ts";
 import type { FetchMarkdownResult } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export async function runFetch(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   input: string,
   options: FetchMarkdownOptions = {},
 ): Promise<FetchMarkdownResult> {
@@ -46,7 +46,7 @@ function mergeWarnings(
 }
 
 async function resolveSource(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   url: string,
   options: FetchMarkdownOptions,
 ): Promise<FetchMarkdownResult> {
@@ -60,7 +60,7 @@ async function resolveSource(
 }
 
 async function fallbackSources(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   url: string,
   options: FetchMarkdownOptions,
 ): Promise<FetchMarkdownResult> {
@@ -79,7 +79,7 @@ async function fallbackSources(
   if (isSwitchOn(options.htmlConvert, "on")) {
     return await tryHtmlConvert(runtime, url);
   }
-  throw new MdFetchError({
+  throw new PagemdError({
     code: "unsupported_content_type",
     message: `No markdown source for ${url}`,
     hint: "Enable --html-convert=on or provide a markdown URL.",

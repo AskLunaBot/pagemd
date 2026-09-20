@@ -39,7 +39,7 @@ export type CacheStore = {
   readonly set: (key: string, value: FetchMarkdownResult) => Promise<void>;
 };
 
-export type CreateMdFetchOptions = {
+export type CreatePagemdOptions = {
   readonly fetch?: FetchLike;
   readonly htmlToMarkdown?: HtmlToMarkdown;
   readonly isHtml?: IsHtml;

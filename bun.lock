@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "mdfetch",
+      "name": "pagemd",
       "dependencies": {
         "turndown": "^7.2.4",
       },

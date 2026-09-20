@@ -52,15 +52,15 @@ ${rootVerbFlags()}
 }
 
 function rootIntro(): string {
-  return `mdfetch — fetch Markdown for humans and agents
+  return `pagemd — fetch Markdown for humans and agents
 
 Usage:
-  mdfetch <url> [url...]
-  mdfetch fetch <url> [url...]
-  mdfetch discover <url> [url...]
-  mdfetch convert [file...]
-  mdfetch --help
-  mdfetch <verb> --help`;
+  pagemd <url> [url...]
+  pagemd fetch <url> [url...]
+  pagemd discover <url> [url...]
+  pagemd convert [file...]
+  pagemd --help
+  pagemd <verb> --help`;
 }
 
 function rootVerbs(): string {
@@ -77,7 +77,7 @@ function rootGlobalFlags(): string {
   return `Global flags (every verb):
   --json                     JSON envelope instead of text/Markdown.
   --help                     Show this help, or verb help with <verb> --help.
-  --user-agent <string>      Default mdfetch/<version>.
+  --user-agent <string>      Default pagemd/<version>.
   --header <Name: value>     Extra request header. Repeatable. Accept is owned by fetch.
   --timeout-ms <number>      Default 15000.
   --retry <number>           Extra attempts after timeout/429/5xx. Default 0.

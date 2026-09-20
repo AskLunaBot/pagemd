@@ -3,10 +3,10 @@ import { requestPage } from "@/http/request.ts";
 import { joinOriginPath } from "@/url/join-origin.ts";
 
 import type { FetchedPage } from "@/http/fetched-page.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export async function fetchOriginPath(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   origin: string,
   path: string,
 ): Promise<FetchedPage> {

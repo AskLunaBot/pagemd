@@ -1,5 +1,5 @@
 export function convertHelpText(): string {
-  return `mdfetch convert [file...]
+  return `pagemd convert [file...]
 
 Convert HTML to Markdown. Reads stdin when no file is given.
 

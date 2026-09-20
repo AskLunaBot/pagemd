@@ -6,12 +6,12 @@ import { markdownFromPage } from "./page-markdown.ts";
 import { fetchResult } from "./result.ts";
 
 import type { FetchMarkdownResult } from "@/types/result-types.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 const acceptHeader = "text/markdown;q=1.0, text/plain;q=0.8, text/html;q=0.5";
 
 export async function tryAcceptMarkdown(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   url: string,
 ): Promise<FetchMarkdownResult | undefined> {
   const page = await requestPage(runtime, url, { accept: acceptHeader });

@@ -10,7 +10,7 @@ import type {
   SingleResult,
 } from "./action-result.ts";
 import type { ParsedCli } from "./parsed.ts";
-import type { MdFetchError } from "@/types/errors.ts";
+import type { PagemdError } from "@/types/errors.ts";
 
 export function renderHelp(parsed: ParsedCli): string {
   const help = helpData(parsed.action, parsed.explicitAction);
@@ -30,7 +30,7 @@ export function renderSuccess(parsed: ParsedCli, data: ActionResult): string {
   return printJson(successEnvelope(action, payload));
 }
 
-export function renderFailure(parsed: ParsedCli, error: MdFetchError): string {
+export function renderFailure(parsed: ParsedCli, error: PagemdError): string {
   if (!parsed.json) {
     return formatErrorText(error);
   }

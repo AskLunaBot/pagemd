@@ -1,7 +1,7 @@
 import { protocolIds } from "./protocol-ids.ts";
 
 export function discoverHelpText(): string {
-  return `mdfetch discover <url> [url...]
+  return `pagemd discover <url> [url...]
 
 Probe origin and homepage agent resources. Does not fetch page bodies
 beyond the listed protocol documents.

@@ -1,10 +1,10 @@
 import { expect, test } from "bun:test";
 
 import { formatDiscoverText } from "@/discover/text.ts";
-import { createMdFetch } from "@/index.ts";
+import { createPagemd } from "@/index.ts";
 
 test("discovers llms.txt on origin", async () => {
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: { get: async () => undefined, set: async () => undefined },
     fetch: async (input) => {
       if (input.endsWith("/llms.txt")) {
@@ -30,7 +30,7 @@ test("discovers llms.txt on origin", async () => {
 });
 
 test("expands agent skills markdown when asked", async () => {
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: { get: async () => undefined, set: async () => undefined },
     fetch: async (input) => await mockSkillFetch(input),
   });
@@ -45,7 +45,7 @@ test("expands agent skills markdown when asked", async () => {
 });
 
 test("warns when A2A card paths disagree", async () => {
-  const client = createMdFetch({
+  const client = createPagemd({
     cache: { get: async () => undefined, set: async () => undefined },
     fetch: async (input) => await mockA2aFetch(input),
   });

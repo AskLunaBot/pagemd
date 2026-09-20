@@ -1,7 +1,7 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 
 export function retryDelayMs(error: Error, fallbackMs: number): number {
-  if (!(error instanceof MdFetchError)) {
+  if (!(error instanceof PagemdError)) {
     return fallbackMs;
   }
   const after = error.details?.retryAfterSeconds;

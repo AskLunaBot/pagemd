@@ -1,20 +1,20 @@
-import type { MdFetchErrorCode } from "@/types/error-codes.ts";
+import type { PagemdErrorCode } from "@/types/error-codes.ts";
 
-const usageCodes = new Set<MdFetchErrorCode>([
+const usageCodes = new Set<PagemdErrorCode>([
   "unknown_action",
   "unknown_flag",
   "invalid_flag_value",
   "missing_argument",
 ]);
 
-const networkCodes = new Set<MdFetchErrorCode>([
+const networkCodes = new Set<PagemdErrorCode>([
   "unreachable",
   "timeout",
   "blocked",
   "rate_limited",
 ]);
 
-export function exitCodeFor(code: MdFetchErrorCode): number {
+export function exitCodeFor(code: PagemdErrorCode): number {
   if (usageCodes.has(code)) {
     return 2;
   }

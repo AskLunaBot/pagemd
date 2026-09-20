@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mdfetch.pages.dev/sitemap.xml
+Sitemap: https://pagemd.pages.dev/sitemap.xml

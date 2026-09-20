@@ -1,9 +1,9 @@
-# mdfetch
+# pagemd
 
 Fetch pages as Markdown for humans and agents.
 
-Same kernel for CLI (`npx mdfetch`, also `bunx` / `deno`) and SDK
-(`createMdFetch`). The SDK is a Web `fetch` library: Node, Bun, Deno, and
+Same kernel for CLI (`npx pagemd`, also `bunx` / `deno`) and SDK
+(`createPagemd`). The SDK is a Web `fetch` library: Node, Bun, Deno, and
 Cloudflare Workers.
 
 Inject `fetch` / `htmlToMarkdown` / `cache` when the host needs cookies, a
@@ -17,20 +17,20 @@ Pipeline: `Accept: text/markdown` → `.md` URL twins → RFC `Link` /
 CLI (npm first):
 
 ```sh
-npx mdfetch --help
-npm install -g mdfetch
+npx pagemd --help
+npm install -g pagemd
 ```
 
-Also: `bunx mdfetch --help`, `deno run -A npm:mdfetch --help`.
+Also: `bunx pagemd --help`, `deno run -A npm:pagemd --help`.
 
 SDK:
 
 ```sh
-npm install mdfetch
-bun add mdfetch
+npm install pagemd
+bun add pagemd
 ```
 
-`--help` (no verb) lists every verb and flag. `mdfetch fetch --help` is
+`--help` (no verb) lists every verb and flag. `pagemd fetch --help` is
 fetch-only. `-j` is an error. Bare hosts complete: `google` →
 `https://google.com/`.
 
@@ -40,22 +40,22 @@ Without `--json`, stdout is human-readable text / Markdown. With `--json`, every
 outcome (success, error, help) is one JSON envelope.
 
 ```sh
-npx mdfetch google
-npx mdfetch google example.com
-npx mdfetch https://better-auth.com/docs/installation,https://example.com
-npx mdfetch fetch --json https://example.com
-npx mdfetch discover https://example.com
-npx mdfetch discover --json --protocol llms-txt,agent-skills --expand-skills on https://example.com
-npx mdfetch convert --base-url https://example.com page.html
+npx pagemd google
+npx pagemd google example.com
+npx pagemd https://better-auth.com/docs/installation,https://example.com
+npx pagemd fetch --json https://example.com
+npx pagemd discover https://example.com
+npx pagemd discover --json --protocol llms-txt,agent-skills --expand-skills on https://example.com
+npx pagemd convert --base-url https://example.com page.html
 ```
 
 Unknown verbs and flags fail with `didYouMean`, allowed values, and a help hint:
 
 ```
-mdfetch: Unknown action "discver".
+pagemd: Unknown action "discver".
 Did you mean "discover"?
 Allowed: fetch, discover, convert
-Run `mdfetch --help` to see usage.
+Run `pagemd --help` to see usage.
 ```
 
 `--json` envelope:
@@ -71,26 +71,26 @@ Run `mdfetch --help` to see usage.
 
 ### Verbs
 
-| argv                              | meaning                                   |
-| --------------------------------- | ----------------------------------------- |
-| `mdfetch <url> [url...]`          | `fetch`; comma or space lists             |
-| `mdfetch fetch <url> [url...]`    | same, explicit                            |
-| `mdfetch discover <url> [url...]` | probe agent well-known / homepage signals |
-| `mdfetch convert [file...]`       | HTML file(s) or stdin → Markdown          |
+| argv                             | meaning                                   |
+| -------------------------------- | ----------------------------------------- |
+| `pagemd <url> [url...]`          | `fetch`; comma or space lists             |
+| `pagemd fetch <url> [url...]`    | same, explicit                            |
+| `pagemd discover <url> [url...]` | probe agent well-known / homepage signals |
+| `pagemd convert [file...]`       | HTML file(s) or stdin → Markdown          |
 
 ### Global flags
 
-| Flag               | Values           | Default             |
-| ------------------ | ---------------- | ------------------- |
-| `--json`           | boolean          | off                 |
-| `--help`           | boolean          | off                 |
-| `--user-agent`     | string           | `mdfetch/<version>` |
-| `--header`         | `Name: value`    | none, repeatable    |
-| `--timeout-ms`     | number           | `15000`             |
-| `--retry`          | number           | `0`                 |
-| `--retry-delay-ms` | number           | `1000`              |
-| `--max-bytes`      | number           | `2000000`           |
-| `--cache`          | `lru` \| `false` | `lru`               |
+| Flag               | Values           | Default            |
+| ------------------ | ---------------- | ------------------ |
+| `--json`           | boolean          | off                |
+| `--help`           | boolean          | off                |
+| `--user-agent`     | string           | `pagemd/<version>` |
+| `--header`         | `Name: value`    | none, repeatable   |
+| `--timeout-ms`     | number           | `15000`            |
+| `--retry`          | number           | `0`                |
+| `--retry-delay-ms` | number           | `1000`             |
+| `--max-bytes`      | number           | `2000000`          |
+| `--cache`          | `lru` \| `false` | `lru`              |
 
 `fetch`: `--accept-markdown`, `--md-url`, `--link-alternate`, `--html-convert`
 (`on`/`off`), `--max-chars`, `--page`, `--page-size`.
@@ -103,14 +103,14 @@ Run `mdfetch --help` to see usage.
 ## SDK
 
 ```ts
-import { createMdFetch, mdfetch } from "mdfetch";
+import { createPagemd, pagemd } from "pagemd";
 
-const page = await mdfetch.fetch("better-auth.com/docs/installation");
+const page = await pagemd.fetch("better-auth.com/docs/installation");
 
-const client = createMdFetch({
+const client = createPagemd({
   fetch: globalThis.fetch,
   cache: "false",
-  userAgent: "mdfetch/0.0.1",
+  userAgent: "pagemd/0.0.1",
   headers: { Cookie: "session=1" },
   timeoutMs: 15_000,
   retry: 2,
@@ -142,24 +142,24 @@ Hooks:
 - `retry` / `retryDelayMs` — extra attempts on timeout, unreachable, 429, and
   5xx. 429 waits `Retry-After` when present.
 
-The SDK throws `MdFetchError` (`code`, `hint`, optional `url` / `status` /
+The SDK throws `PagemdError` (`code`, `hint`, optional `url` / `status` /
 `details`). The JSON envelope is CLI-only. Published JS is ESM: Node uses
 Turndown+domino; Workers / Deno / browsers use the DOMParser build. CLI is a
-Node ESM file (`#!/usr/bin/env node`) so `npx mdfetch` works; Bun and Deno run
+Node ESM file (`#!/usr/bin/env node`) so `npx pagemd` works; Bun and Deno run
 that same file.
 
 ## Virtual CLI
 
-`createMdFetchCommand(ctx)` returns `{ execute(args) }` — a bash command, not a
+`createPagemdCommand(ctx)` returns `{ execute(args) }` — a bash command, not a
 process. Bind IO (`cwd`, `stdin`, `readFile`) and SDK hooks (`fetch`, `cache`,
 …) once. Same argv, help, and `{ stdout, stderr, exitCode }` as the real CLI.
 Omit `stdin` to treat convert-without-files as help (TTY). Pass `stdin: ""` for
 an empty pipe.
 
 ```ts
-import { createMdFetchCommand } from "mdfetch";
+import { createPagemdCommand } from "pagemd";
 
-const mdfetchCmd = createMdFetchCommand({
+const pagemdCmd = createPagemdCommand({
   cwd: "/work",
   stdin: "<h1>Hi</h1>",
   readFile: async (path) => htmlByPath[path],
@@ -167,15 +167,15 @@ const mdfetchCmd = createMdFetchCommand({
   cache: "false",
 });
 
-await mdfetchCmd.execute(["--json", "https://example.com"]);
-await mdfetchCmd.execute(["convert", "--base-url", "https://example.com"]);
-await mdfetchCmd.execute(["convert", "page.html"]);
+await pagemdCmd.execute(["--json", "https://example.com"]);
+await pagemdCmd.execute(["convert", "--base-url", "https://example.com"]);
+await pagemdCmd.execute(["convert", "page.html"]);
 ```
 
 Any shell wraps `execute`:
 
 ```ts
-const cmd = createMdFetchCommand({ cwd, stdin, readFile });
+const cmd = createPagemdCommand({ cwd, stdin, readFile });
 return await cmd.execute(args);
 ```
 
@@ -189,7 +189,7 @@ src/
   index.ts
   browser.ts     browser / Deno / worker bundle entry
   cli/           parse, help, --json envelope; `cli.ts` is the bin
-  client/        createMdFetch
+  client/        createPagemd
   fetch/         page → Markdown pipeline
   discover/      agent probes; one file per protocol
   convert/       HTML → Markdown
@@ -208,5 +208,5 @@ Each protocol lives in `src/discover/protocols/`:
 Skills index. A2A probes both `agent-card.json` and legacy `agent.json` and
 warns if both exist and differ.
 
-mdfetch consumes these signals. It does not score GEO, handshake MCP, or drive a
+pagemd consumes these signals. It does not score GEO, handshake MCP, or drive a
 browser.

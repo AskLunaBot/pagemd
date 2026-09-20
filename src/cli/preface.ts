@@ -32,7 +32,7 @@ function prefaceLines(result: SingleResult): string[] {
 
 function fetchLines(result: FetchMarkdownResult): string[] {
   const lines = [
-    `mdfetch: ${result.url}`,
+    `pagemd: ${result.url}`,
     `final-url: ${result.finalUrl}`,
     `source: ${result.source}`,
   ];
@@ -44,13 +44,13 @@ function fetchLines(result: FetchMarkdownResult): string[] {
 }
 
 function discoverLines(result: DiscoverResult): string[] {
-  const lines = [`mdfetch discover: ${result.url}`, `origin: ${result.origin}`];
+  const lines = [`pagemd discover: ${result.url}`, `origin: ${result.origin}`];
   pushWarnings(lines, result.warnings);
   return lines;
 }
 
 function convertLines(result: ConvertResult): string[] {
-  const lines = ["mdfetch convert"];
+  const lines = ["pagemd convert"];
   if (result.baseUrl !== undefined) {
     lines.push(`base-url: ${result.baseUrl}`);
   }

@@ -3,19 +3,19 @@
 import { readFile } from "node:fs/promises";
 import { text } from "node:stream/consumers";
 
-import { createMdFetchCommand } from "./command.ts";
+import { createPagemdCommand } from "./command.ts";
 
-import type { MdFetchCommandContext } from "./command.ts";
+import type { PagemdCommandContext } from "./command.ts";
 
 async function main(): Promise<void> {
-  const command = createMdFetchCommand(await nodeContext());
+  const command = createPagemdCommand(await nodeContext());
   const result = await command.execute(process.argv.slice(2));
   process.stdout.write(result.stdout);
   process.stderr.write(result.stderr);
   process.exit(result.exitCode);
 }
 
-async function nodeContext(): Promise<MdFetchCommandContext> {
+async function nodeContext(): Promise<PagemdCommandContext> {
   return {
     cwd: process.cwd(),
     stdinIsTty: process.stdin.isTTY,

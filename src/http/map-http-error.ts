@@ -1,4 +1,4 @@
-import { MdFetchError } from "@/types/errors.ts";
+import { PagemdError } from "@/types/errors.ts";
 import { helpHint } from "@/utils/help-hint.ts";
 
 import { parseRetryAfterSeconds } from "./parse-retry-after.ts";
@@ -10,7 +10,7 @@ export function mapHttpStatus(
   headers: Headers,
 ): never {
   if (status === 404 || status === 410) {
-    throw new MdFetchError({
+    throw new PagemdError({
       code: "not_found",
       message: `HTTP ${status} for ${url}`,
       hint: `${helpHint("discover")} The path is missing, not a soft 404.`,
@@ -19,7 +19,7 @@ export function mapHttpStatus(
     });
   }
   if (status === 403) {
-    throw new MdFetchError({
+    throw new PagemdError({
       code: "blocked",
       message: `HTTP 403 for ${url}`,
       hint: "The site blocked this fetch. Inject a custom fetch, do not spoof GPTBot.",
@@ -30,7 +30,7 @@ export function mapHttpStatus(
   if (status === 429) {
     throw rateLimitedError(url, headers);
   }
-  throw new MdFetchError({
+  throw new PagemdError({
     code: "http_error",
     message: `HTTP ${status} for ${url}`,
     hint: helpHint(),
@@ -39,10 +39,10 @@ export function mapHttpStatus(
   });
 }
 
-function rateLimitedError(url: string, headers: Headers): MdFetchError {
+function rateLimitedError(url: string, headers: Headers): PagemdError {
   const retryAfter = parseRetryAfterSeconds(readHeader(headers, "retry-after"));
   if (retryAfter === undefined) {
-    return new MdFetchError({
+    return new PagemdError({
       code: "rate_limited",
       message: `HTTP 429 for ${url}`,
       hint: "Wait and retry. The server sent 429 Too Many Requests.",
@@ -50,7 +50,7 @@ function rateLimitedError(url: string, headers: Headers): MdFetchError {
       status: 429,
     });
   }
-  return new MdFetchError({
+  return new PagemdError({
     code: "rate_limited",
     message: `HTTP 429 for ${url}`,
     hint: `Wait ${retryAfter} seconds (Retry-After) and retry.`,

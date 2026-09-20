@@ -5,7 +5,7 @@ import type {
   IsHtml,
 } from "./options.ts";
 
-export type MdFetchRuntime = {
+export type PagemdRuntime = {
   readonly fetch: FetchLike;
   readonly htmlToMarkdown: HtmlToMarkdown;
   readonly isHtml: IsHtml;

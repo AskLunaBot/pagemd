@@ -2,12 +2,12 @@ import { headersFromLines } from "@/http/header-record.ts";
 import { withOptional } from "@/utils/optional.ts";
 
 import type { ParsedCli } from "./parsed.ts";
-import type { CacheMode, CreateMdFetchOptions } from "@/types/options.ts";
+import type { CacheMode, CreatePagemdOptions } from "@/types/options.ts";
 
 export function clientOptions(
   parsed: ParsedCli,
-  defaults: CreateMdFetchOptions,
-): CreateMdFetchOptions {
+  defaults: CreatePagemdOptions,
+): CreatePagemdOptions {
   return {
     ...defaults,
     ...withOptional("userAgent", parsed.userAgent),
@@ -21,7 +21,7 @@ export function clientOptions(
 }
 
 function mergeHeaders(
-  extra: CreateMdFetchOptions["headers"],
+  extra: CreatePagemdOptions["headers"],
   lines: readonly string[] | undefined,
 ): Readonly<Record<string, string>> | undefined {
   const fromLines = headersFromLines(lines);

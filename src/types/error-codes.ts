@@ -1,4 +1,4 @@
-export const mdFetchErrorCodes = [
+export const pagemdErrorCodes = [
   "unknown_action",
   "unknown_flag",
   "invalid_flag_value",
@@ -16,4 +16,4 @@ export const mdFetchErrorCodes = [
   "unsupported_content_type",
 ] as const;
 
-export type MdFetchErrorCode = (typeof mdFetchErrorCodes)[number];
+export type PagemdErrorCode = (typeof pagemdErrorCodes)[number];

@@ -4,7 +4,7 @@ import { parseJsonObject } from "@/utils/json-parse.ts";
 import { fetchOriginPath, pageContentType } from "./fetch-origin-path.ts";
 
 import type { JsonObject } from "@/types/json-value.ts";
-import type { MdFetchRuntime } from "@/types/runtime.ts";
+import type { PagemdRuntime } from "@/types/runtime.ts";
 
 export type JsonDocument = {
   readonly url: string;
@@ -14,7 +14,7 @@ export type JsonDocument = {
 };
 
 export async function fetchJsonDocument(
-  runtime: MdFetchRuntime,
+  runtime: PagemdRuntime,
   origin: string,
   path: string,
 ): Promise<JsonDocument | undefined> {

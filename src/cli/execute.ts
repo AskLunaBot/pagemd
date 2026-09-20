@@ -1,6 +1,6 @@
 import { thrownError } from "@/utils/thrown.ts";
 
-import { asMdFetchError } from "./as-error.ts";
+import { asPagemdError } from "./as-error.ts";
 import { exitCodeFor } from "./exit-code.ts";
 import { needsHelp } from "./needs-help.ts";
 import { parseArgv } from "./parse.ts";
@@ -10,12 +10,12 @@ import { safeParse } from "./safe-parse.ts";
 
 import type { CliExecResult } from "./exec-result.ts";
 import type { CliHost } from "./host.ts";
-import type { CreateMdFetchOptions } from "@/types/options.ts";
+import type { CreatePagemdOptions } from "@/types/options.ts";
 
 export async function executeCli(
   argv: string[],
   host: CliHost,
-  defaults: CreateMdFetchOptions = {},
+  defaults: CreatePagemdOptions = {},
 ): Promise<CliExecResult> {
   try {
     return await executeOk(argv, host, defaults);
@@ -27,7 +27,7 @@ export async function executeCli(
 async function executeOk(
   argv: string[],
   host: CliHost,
-  defaults: CreateMdFetchOptions,
+  defaults: CreatePagemdOptions,
 ): Promise<CliExecResult> {
   const parsed = parseArgv(argv);
   if (needsHelp(parsed, host.stdinIsTty)) {
@@ -39,7 +39,7 @@ async function executeOk(
 
 function executeFail(argv: string[], error: Error): CliExecResult {
   const parsed = safeParse(argv);
-  const wrapped = asMdFetchError(error);
+  const wrapped = asPagemdError(error);
   const rendered = renderFailure(parsed, wrapped);
   if (parsed.json) {
     return {
